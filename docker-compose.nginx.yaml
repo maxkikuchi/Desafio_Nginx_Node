@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  nginx-service:  
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile                
+    image: maxkikuchi/nginx
+    container_name: nginx
+    networks:
+      - netnode
+    ports:
+      - "8080:80"
+
+networks:
+  netnode:
+    driver: bridge       
