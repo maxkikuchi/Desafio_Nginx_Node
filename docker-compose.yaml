@@ -8,7 +8,8 @@ services:
         dockerfile: Dockerfile
       image: maxkikuchi/node:latest
       entrypoint: dockerize -wait tcp://mysql:3306 -timeout 20s docker-entrypoint.sh
-      command: node index.js
+      #command: "npm install express && node index.js"
+      command: "node index.js"
       container_name: node
       volumes:
         - ./node:/usr/src/app
