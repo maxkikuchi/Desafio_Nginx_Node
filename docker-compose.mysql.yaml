@@ -3,7 +3,10 @@ version: '3.8'
 services:
   
   mysql-service:
-    image: mysql:5.7
+    build:
+      context: ./mysql_init
+      dockerfile: Dockerfile   
+    image: maxkikuchi/mysqlfc:latest
     #command: --innodb-use-native-aio=0
     container_name: mysql
     restart: always

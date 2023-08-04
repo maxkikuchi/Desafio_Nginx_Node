@@ -3,6 +3,9 @@ FROM node:latest
 RUN apt-get update && \
     apt-get install vim -y
 
+#RUN npm install express --save
+
+
 WORKDIR /usr/src/app
 
 RUN npm install express --save

@@ -12,6 +12,7 @@ services:
       container_name: node
       volumes:
         - ./node:/usr/src/app
+        - /usr/src/app/node_modules/
       restart: always
       tty: true
       networks: 
@@ -20,18 +21,21 @@ services:
         - mysql-service
 
   mysql-service:
-      image: mysql:5.7
-      command: --innodb-use-native-aio=0
-      container_name: mysql
-      restart: always
-      tty: true  
-      volumes:
-        - ./mysql:/var/lib/mysql
-      environment:
-        - MYSQL_DATABASE=nodedb
-        - MYSQL_ROOT_PASSWORD=root
-      networks: 
-        - netnode
+    build:
+      context: ./mysql_init
+      dockerfile: Dockerfile   
+    image: maxkikuchi/mysqlfc:latest
+    #command: --innodb-use-native-aio=0
+    container_name: mysql
+    restart: always
+    tty: true  
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ROOT_PASSWORD=root
+    networks: 
+      - netnode
   
   nginx-service:  
       build:
